@@ -122,7 +122,7 @@ export const fetchData = async (game, lastDraw = null) => {
     // Lancer le script
     const datas = await main();
     if(lastDraw) {
-        const newData = datas.filter((data) => data.date > lastDraw.date)
+        const newData = datas.filter((data) => data.date > lastDraw.date.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' }))
         return newData
     }
     return datas

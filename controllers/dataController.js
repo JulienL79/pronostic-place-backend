@@ -65,3 +65,23 @@ export const deleteDraw = async (req, res) => {
         return res.status(500).json({message: 'Internal server error'})
     }
 }
+
+export const deleteDrawByID = async (req, res) => {
+    const {game, id} = req.params
+    console.log(id)
+    try {
+        const deletedDraws = 
+            game === 'euromillions' ?
+                await Euromillions.deleteOne({ _id: id }) :
+            game === 'loto' ?
+                await Loto.deleteOne({ _id: id }) :
+            null
+        if(!deletedDraws) {
+            return res.status(404).json({message: 'Draws not found'})
+        }
+        return res.status(203).json({message: `Draw has been deleted`})
+    }
+    catch(err) {
+        return res.status(500).json({message: 'Internal server error'})
+    }
+}

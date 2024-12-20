@@ -11,6 +11,7 @@ export const dataValidation = async (req, res, next) => {
                 game === 'loto' ?
                     await Loto.findOne().sort({ date: -1 }) :
                 null
+                
             const newDatas = await fetchData(game, lastDraw)
 
             console.log(`${newDatas.length || 0} nouvelles données à intégrer à la table ${game}`)
