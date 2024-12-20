@@ -115,6 +115,7 @@ export const fetchData = async (game, lastDraw = null) => {
         } finally {
             // Nettoyage des fichiers temporaires
             if (fs.existsSync(zipPath)) fs.unlinkSync(zipPath);
+            if (fs.existsSync(csvPath)) fs.unlinkSync(csvPath);  // Suppression du fichier CSV extrait
         }
     };
 
