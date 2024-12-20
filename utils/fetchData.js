@@ -90,7 +90,7 @@ export const fetchData = async (game, lastDraw = null) => {
     const main = async () => {
         const zipPath = './file.zip'; // Chemin temporaire pour stocker le fichier ZIP téléchargé
         const outputDir = './extracted'; // Répertoire où extraire les fichiers ZIP
-        // const csvFileName = 'data.csv'; // Nom du fichier CSV attendu dans le ZIP
+        let csvPath = null; // Nom du fichier CSV attendu dans le ZIP
         const ZIP_URL = game === 'euromillions' ? ZIP_URL_EUROMILLIONS : game === 'loto' ? ZIP_URL_LOTO : null
 
         if (!ZIP_URL) {
@@ -102,7 +102,7 @@ export const fetchData = async (game, lastDraw = null) => {
             await downloadFile(ZIP_URL, zipPath);
 
             console.log('Extraction du fichier ZIP...');
-            const csvPath = await extractZip(zipPath, outputDir);
+            csvPath = extractZip(zipPath, outputDir);
 
             console.log('Lecture du fichier CSV...');
             // const csvPath = `${outputDir}/${csvFileName}`;
