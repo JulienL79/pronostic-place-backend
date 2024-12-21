@@ -25,6 +25,10 @@ db.on('connected', () => {
 })
 db.on("error" , console .error.bind(console , "MongoDB connection error:" ));
 
+app.get('/ping', (req, res) => {
+    return res.status(200).json({message: 'Server still running'})
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`)
 })
