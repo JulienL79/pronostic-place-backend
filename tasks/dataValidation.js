@@ -1,9 +1,8 @@
 import Euromillions from "../models/Euromillions.js";
 import Loto from "../models/Loto.js";
-import { fetchData } from "../utils/fetchData.js";
+import { fetchData } from "./fetchData.js";
 
-export const dataValidation = async (req, res, next) => {
-    const {game} = req.params;
+export const dataValidation = async (game) => {
     if(game) {
         try {
             const lastDraw = game === 'euromillions' ?
@@ -11,13 +10,16 @@ export const dataValidation = async (req, res, next) => {
                 game === 'loto' ?
                     await Loto.findOne().sort({ date: -1 }) :
                 null
-                
+            
+            console.log(lastDraw)
             const newDatas = await fetchData(game, lastDraw)
 
-            console.log(`${newDatas.length || 0} nouvelles données à intégrer à la table ${game}`)
+            console.log(newDatas)
+
+            console.log(`${newDatas.length || 'Aucune'} nouvelles données à intégrer à la table ${game}`)
 
             if(!newDatas) {
-                next()
+                return
             }
 
             newDatas.map(async (data) => {
@@ -32,10 +34,12 @@ export const dataValidation = async (req, res, next) => {
 
             console.log(`Nouvelle(s) donnée(s) intégrée(s)`)
             
-            next()
+            return
         }
         catch(err) {
             console.log(err)
         }
     }
+
+    console.log(`Aucun jeu selectionné pour la mise à jour des données`)
 }

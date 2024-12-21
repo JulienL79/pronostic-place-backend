@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors'
 import dataRouter from './routes/dataRouter.js';
+import './cronJob.js'; // Import de cronJob.js pour lancer les tâches
 
 const app = express();
 const PORT = process.env.PORT || 3005
