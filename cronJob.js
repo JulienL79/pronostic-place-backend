@@ -8,7 +8,7 @@ const myDailyTask = async () => {
 };
 
 // Planification de la tâche : '0 0 * * *' correspond à tous les jours à minuit
-cron.schedule('0 0 * * *', () => {
+cron.schedule('0 10 * * *', () => {
     const today = new Date()
     console.log(`Démarrage de la tâche planifiée le ${today}`);
     myDailyTask();

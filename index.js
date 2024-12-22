@@ -26,6 +26,8 @@ db.on('connected', () => {
 db.on("error" , console .error.bind(console , "MongoDB connection error:" ));
 
 app.get('/ping', (req, res) => {
+    const now = new Date()
+    console.log(`Ping at ${now}`)
     return res.status(200).json({message: 'Server still running'})
 })
 
