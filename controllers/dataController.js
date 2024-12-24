@@ -14,6 +14,7 @@ export const getAllDraws = async (req, res) => {
         if(!draws || draws.length < 1) {
             return res.status(404).json({message: 'Draws not found'})
         }
+        console.log(`Envoi des données de la table ${game}`)
         return res.json(draws)
     }
     catch(err) {
