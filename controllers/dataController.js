@@ -1,5 +1,6 @@
 import Loto from "../models/Loto.js";
 import Euromillions from "../models/Euromillions.js";
+import { dataValidation } from '../tasks/dataValidation.js';
 
 export const getAllDraws = async (req, res) => {
     const {game} = req.params
@@ -68,7 +69,6 @@ export const deleteDraw = async (req, res) => {
 
 export const deleteDrawByID = async (req, res) => {
     const {game, id} = req.params
-    console.log(id)
     try {
         const deletedDraws = 
             game === 'euromillions' ?
@@ -82,6 +82,27 @@ export const deleteDrawByID = async (req, res) => {
         return res.status(203).json({message: `Draw has been deleted`})
     }
     catch(err) {
+        return res.status(500).json({message: 'Internal server error'})
+    }
+}
+
+export const updateDraws = async (req, res) => {
+    try{        
+        const euromillionsIsUpdated = await dataValidation('euromillions')
+        const lotoIsUpdated = await dataValidation('loto')
+        const updatedMessage = 
+            euromillionsIsUpdated && lotoIsUpdated ?
+                'Toutes les tables ont été mises à jour' :
+            euromillionsIsUpdated && !lotoIsUpdated ?
+                'La table euromillions a été mise à jour' :
+            !euromillionsIsUpdated && lotoIsUpdated ?
+                'La table loto a été mise à jour' :
+            "Aucune table n'a été mise à jour"
+
+        console.log(updatedMessage)
+        return res.status(200).json({message: updatedMessage})
+    }
+    catch (err) {
         return res.status(500).json({message: 'Internal server error'})
     }
 }

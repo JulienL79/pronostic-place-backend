@@ -11,15 +11,12 @@ export const dataValidation = async (game) => {
                     await Loto.findOne().sort({ date: -1 }) :
                 null
             
-            console.log(lastDraw)
             const newDatas = await fetchData(game, lastDraw)
 
-            console.log(newDatas)
+            console.log(`${newDatas.length > 0 || 'Aucune'} nouvelle(s) donnée(s) à intégrer à la table ${game}`)
 
-            console.log(`${newDatas.length || 'Aucune'} nouvelles données à intégrer à la table ${game}`)
-
-            if(!newDatas) {
-                return
+            if(newDatas.length < 1) {
+                return false
             }
 
             newDatas.map(async (data) => {
@@ -32,9 +29,9 @@ export const dataValidation = async (game) => {
                 newData && newData.save()
             })
 
-            console.log(`Nouvelle(s) donnée(s) intégrée(s)`)
+            console.log(`Nouvelle(s) donnée(s) intégrée(s) à la table ${game}`)
             
-            return
+            return true
         }
         catch(err) {
             console.log(err)
@@ -42,4 +39,5 @@ export const dataValidation = async (game) => {
     }
 
     console.log(`Aucun jeu selectionné pour la mise à jour des données`)
+    return false
 }
