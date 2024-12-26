@@ -13,7 +13,7 @@ export const dataValidation = async (game) => {
             
             const newDatas = await fetchData(game, lastDraw)
 
-            console.log(`${newDatas.length > 0 || 'Aucune'} nouvelle(s) donnée(s) à intégrer à la table ${game}`)
+            console.log(`${newDatas.length || 'Aucune'} nouvelle(s) donnée(s) à intégrer à la table ${game}`)
 
             if(newDatas.length < 1) {
                 return false
