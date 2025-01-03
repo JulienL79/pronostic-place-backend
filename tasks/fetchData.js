@@ -4,8 +4,8 @@ import AdmZip from 'adm-zip';
 import csv from 'csv-parser';
 
 // URL du fichier ZIP
-const ZIP_URL_LOTO = 'https://www.sto.api.fdj.fr/anonymous/service-draw-info/v3/documentations/1a2b3c4d-9876-4562-b3fc-2c963f66afp6';
-const ZIP_URL_EUROMILLIONS = 'https://www.sto.api.fdj.fr/anonymous/service-draw-info/v3/documentations/1a2b3c4d-9876-4562-b3fc-2c963f66afe6';
+const ZIP_URL_LOTO = process.env.ZIP_URL_LOTO
+const ZIP_URL_EUROMILLIONS = process.env.ZIP_URL_EUROMILLIONS
 
 
 export const fetchData = async (game, lastDraw = null) => {

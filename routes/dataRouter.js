@@ -7,8 +7,8 @@ dataRouter.get('/:game/draws', getAllDraws)
 
 dataRouter.get('/update', updateDraws)
 
-dataRouter.delete('/:game/delete/:choice', deleteDraw)
+// dataRouter.delete('/:game/delete/:choice', deleteDraw)
 
-dataRouter.delete('/:game/deletebyid/:id', deleteDrawByID)
+// dataRouter.delete('/:game/deletebyid/:id', deleteDrawByID)
 
 export default dataRouter
