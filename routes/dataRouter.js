@@ -5,7 +5,7 @@ const dataRouter = Router()
 
 dataRouter.get('/:game/draws', getAllDraws)
 
-dataRouter.get('/update', updateDraws)
+dataRouter.post('/update', updateDraws)
 
 // dataRouter.delete('/:game/delete/:choice', deleteDraw)
 

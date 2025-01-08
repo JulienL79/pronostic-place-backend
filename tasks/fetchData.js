@@ -7,7 +7,6 @@ import csv from 'csv-parser';
 const ZIP_URL_LOTO = process.env.ZIP_URL_LOTO
 const ZIP_URL_EUROMILLIONS = process.env.ZIP_URL_EUROMILLIONS
 
-
 export const fetchData = async (game, lastDraw = null) => {
     // Étape 1 : Télécharger le fichier ZIP
     const downloadFile = async (url, outputPath) => {
